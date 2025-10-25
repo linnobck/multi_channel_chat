@@ -1,0 +1,64 @@
+I have tested that the multi-channel chat system works by doing the following:
+
+1. First, I opened a terminal window and entered the correct command to start the server:
+python mc_server.py <ip> <post_port> <pub_port> --> python3 mc_server.py <ip> 7777 5505
+
+
+
+2. Then I openend another two terminals to test communication in one channel:
+python mc_client.py <ip> <post_port> <pub_port> <channel> <name>
+The first user was python3 mc_client.py 127.0.0.1 7777 5505 books linn
+The second user was python3 mc_client.py 127.0.0.1 7777 5505 books rheea
+Everything worked:
+Output in one of the two terminals:
+
+Subscribed to channel 'books'
+
+books rheea: Hello Linn! (10-25-2025 13:21:17)
+Hello Rheea!!
+
+books linn: Hello Rheea!! (10-25-2025 13:21:26)
+
+
+
+3. Then I opened a fourth terminal to create another channel:
+python mc_client.py <ip> <post_port> <pub_port> <channel> <name>
+python3 mc_client.py <ip> 7777 5505 sports chad
+Everything worked, messages only showed on that channel:
+
+Subscribed to channel 'sports'
+Yoooo Bros!
+
+sports chad: Yoooo Bros! (10-25-2025 13:24:37)
+
+4. Lastly, I created a new terminal to view incoming messages from all channels, as read-only
+python mc_client.py <ip> <post_port> <pub_port> <channel> <name>
+python3 mc_client.py <ip> 7777 5505 ALL viewer
+
+Everything worked here as well! All messages from other channels showed up, while the viewer could not send any.
+Output on the terminal:
+
+Subscribed to all channels (read-only)
+You cannot write into this channel (read-only)
+
+books linn: wiwiwiwi (10-25-2025 13:27:27)
+
+books rheea: lalalalala (10-25-2025 13:27:32)
+
+books rheea: yippieee!!! (10-25-2025 13:27:37)
+
+sports chad: Hey guys!  (10-25-2025 13:27:55)
+
+sports chad: Losers! (10-25-2025 13:27:58)
+
+books linn: YIPPIEEEE!!! (10-25-2025 13:28:11)
+
+5. To exit, i typed in EXIT into one of the channels and it showed up only inside the channel, the ALL channel, and on the server.
+Output:
+sports chad: EXIT (10-25-2025 13:30:43)
+
+sports chad has left the chat.
+
+Connected with ('127.0.0.1', 65357)
+[sports] [10-25-2025 13:30:43] chad: EXIT
+
